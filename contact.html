@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Praiz — Web Developer & Cybersecurity Specialist.">
+    <title>Contact — Praiz</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <meta property="og:title" content="Contact — Praiz">
+    <meta property="og:description" content="Contact Praiz — Web Developer & Cybersecurity Specialist.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .fade-in {
+            animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        main {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: calc(var(--nav-h) + 3rem);
+            padding-bottom: 5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            width: 100%;
+            align-items: center;
+        }
+
+        .contact-info h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 450px;
+            line-height: 1.7;
+        }
+
+        .contact-form-wrap {
+            position: relative;
+        }
+
+        .contact-form-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            filter: blur(20px);
+            opacity: 0.15;
+            border-radius: var(--radius-xl);
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .contact-form-wrap:hover::before {
+            opacity: 0.3;
+        }
+
+        .contact-form {
+            background: var(--surface);
+            padding: clamp(2rem, 4vw, 3rem);
+            border-radius: var(--radius-xl);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(5, 11, 20, 0.6);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 1rem;
+            transition: all var(--transition);
+            outline: none;
+        }
+
+        .form-control::placeholder {
+            color: var(--text-dim);
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
+            background: rgba(5, 11, 20, 0.9);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--spring);
+            border: none;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin-top: 0.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(56,189,248,0.25);
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(56,189,248,0.4);
+        }
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+        @media (max-width: 900px) {
+            .btn-whatsapp {
+                width: 100%;
+            }
+        }
+
+        .secure-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .secure-badge svg {
+            color: var(--green);
+            width: 16px;
+            height: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .contact-info {
+                text-align: center;
+            }
+
+            .contact-info p {
+                margin: 0 auto 2rem;
+            }
+
+            .secure-badge {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .contact-form {
+                padding: 1.5rem;
+                border-radius: var(--radius-lg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Praiz.</a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+  <div class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation">
+    <div class="mobile-drawer-logo">Praiz.</div>
+    <nav class="mobile-nav-links">
+      <a href="index.html">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+        Home
+      </a>
+      <a href="about.html">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        About
+      </a>
+      <a href="projects.html">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+        Projects
+      </a>
+      <a href="contact.html" class="active">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+        Contact
+      </a>
+    </nav>
+    <div class="mobile-drawer-footer">© 2025 Praiz. All rights reserved.</div>
+  </div>
+
+    <main class="container">
+        <div class="contact-grid">
+            <div class="contact-info fade-in">
+                <h2>Let's <span class="gradient-text">Connect</span></h2>
+                <p>Have a project in mind, need a security consultation, or just want to say hi? I'd love to hear from
+                    you via a secure transmission. Fill out the form or reach out directly on WhatsApp.</p>
+                <a href="https://wa.me/2349049491824" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="margin-bottom:1.5rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Chat on WhatsApp
+                </a>
+                <div class="secure-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    End-to-end encrypted connection — 09049491824
+                </div>
+            </div>
+
+            <div class="contact-form-wrap fade-in" style="animation-delay: 0.2s;">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" class="form-control"
+                                placeholder="Tell me about your project or security needs..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Initialize Connection</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <a href="index.html" class="footer-logo">Praiz.</a>
+          <nav class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+        </div>
+        <p class="footer-copy">© 2025 Praiz. Crafted with passion & precision.</p>
+      </div>
+    </footer>
+
+  <script>
+    (() => {
+      // Navbar scroll effect
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 20);
+      }, { passive: true });
+
+      // Hamburger Menu Toggle
+      const hamburger = document.getElementById('hamburger');
+      const drawer    = document.getElementById('mobileDrawer');
+      const overlay   = document.getElementById('mobileOverlay');
+
+      function openMenu() {
+        hamburger.classList.add('open');
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        hamburger.setAttribute('aria-expanded', 'true');
+      }
+      function closeMenu() {
+        hamburger.classList.remove('open');
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+      hamburger.addEventListener('click', () => drawer.classList.contains('open') ? closeMenu() : openMenu());
+      overlay.addEventListener('click', closeMenu);
+      document.querySelectorAll('.mobile-nav-links a').forEach(a => a.addEventListener('click', closeMenu));
+
+      // Form submission to WhatsApp with security improvements
+      document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Input validation
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        // Basic validation
+        if (!name || !email || !message) {
+          alert('Please fill in all fields');
+          return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          alert('Please enter a valid email address');
+          return;
+        }
+        
+        // Message length validation
+        if (message.length < 10) {
+          alert('Message must be at least 10 characters long');
+          return;
+        }
+        
+        // Sanitize inputs
+        const sanitizedName = name.replace(/[^a-zA-Z0-9\s]/g, '');
+        const sanitizedEmail = email.replace(/[^a-zA-Z0-9@._-]/g, '');
+        const sanitizedMessage = message.replace(/[^a-zA-Z0-9\s.,!?@#\$%\^&\*\(\)_\+=\[\]\{\};:'"\\|<>\/?]/g, '');
+        
+        const whatsappNumber = "2349049491824";
+        const whatsappText = `Hello Praiz, my name is ${encodeURIComponent(sanitizedName)} (${encodeURIComponent(sanitizedEmail)}).%0A%0A${encodeURIComponent(sanitizedMessage)}`;
+        
+        // Open WhatsApp in new tab
+        window.open(`https://wa.me/${whatsappNumber}?text=${whatsappText}`, '_blank');
+        
+        // Reset form
+        this.reset();
+        
+        // Show success message
+        alert('Message sent successfully! I will contact you via WhatsApp shortly.');
+      });
+
+      // Fade-in observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+          }
+        });
+      });
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    })();
+  </script>
+</body>
+
+</html>

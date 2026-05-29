@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Praiz — Web Developer & Cybersecurity Specialist. Building secure, high-performance digital experiences." />
+  <title>Praiz — Web Developer & CyberSec</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <meta property="og:title" content="Praiz — Web Developer & CyberSec">
+  <meta property="og:description" content="Crafting secure, high-performance digital experiences.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── PAGE WRAPPER ── */
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--nav-h);
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: center;
+      padding: clamp(3rem, 8vh, 6rem) 0;
+    }
+
+    /* ── HERO CONTENT ── */
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(56,189,248,0.08);
+      border: 1px solid rgba(56,189,248,0.2);
+      padding: 0.45rem 1.1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.75rem;
+    }
+    .hero-eyebrow .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title .name {
+      display: block;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 50%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    /* ── STATS ROW ── */
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item { text-align: left; }
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-top: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── HERO IMAGE ── */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .hero-img-frame {
+      position: relative;
+      width: min(440px, 100%);
+      aspect-ratio: 1;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(56,189,248,0.05), rgba(124,58,237,0.05));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      animation: float 7s ease-in-out infinite;
+    }
+    .hero-img-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(56,189,248,0.15) 0%, transparent 50%, rgba(124,58,237,0.1) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .hero-img-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0d1526, #111827);
+    }
+    .hero-img-placeholder svg {
+      width: 120px; height: 120px;
+      opacity: 0.15;
+    }
+
+    /* Floating badge on image */
+    .img-badge {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(8,13,26,0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      white-space: nowrap;
+      z-index: 2;
+      box-shadow: var(--shadow);
+    }
+    .img-badge-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .img-badge-text { font-size: 0.8rem; }
+    .img-badge-text strong { display: block; color: var(--text); font-weight: 600; }
+    .img-badge-text span { color: var(--text-muted); font-size: 0.72rem; }
+
+    /* Decorative ring */
+    .hero-ring {
+      position: absolute;
+      width: calc(100% + 40px);
+      height: calc(100% + 40px);
+      border-radius: calc(var(--radius-xl) + 20px);
+      border: 1px dashed rgba(56,189,248,0.15);
+      top: -20px; left: -20px;
+      pointer-events: none;
+      animation: float 7s ease-in-out infinite;
+      animation-delay: -1s;
+    }
+
+    /* ── TECH STACK STRIP ── */
+    .tech-strip {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .tech-strip-label {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.75rem;
+    }
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .tech-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 50px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: all var(--transition);
+    }
+    .tech-pill:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+      color: var(--text);
+      transform: translateY(-2px);
+    }
+    .tech-pill .pill-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .tech-pill.cyber .pill-dot { background: var(--green); }
+
+    /* ── SERVICES SECTION ── */
+    .services {
+      padding: clamp(4rem, 8vh, 7rem) 0;
+      position: relative;
+      z-index: 1;
+    }
+    .services-header {
+      text-align: center;
+      margin-bottom: clamp(2.5rem, 5vh, 4rem);
+    }
+    .services-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+    }
+    .services-header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all var(--spring);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--spring);
+    }
+    .service-card:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow), var(--shadow-glow);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--radius);
+      background: rgba(56,189,248,0.1);
+      border: 1px solid rgba(56,189,248,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+    .service-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      padding: clamp(3rem, 6vh, 5rem) 0;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-card {
+      background: linear-gradient(135deg, rgba(56,189,248,0.06), rgba(124,58,237,0.06));
+      border: 1px solid rgba(56,189,248,0.15);
+      border-radius: var(--radius-xl);
+      padding: clamp(2.5rem, 5vw, 4rem);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at center, rgba(56,189,248,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-card h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+    }
+    .cta-card p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+    .cta-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 992px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-eyebrow, .hero-actions, .hero-stats { justify-content: center; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      .hero-visual { order: -1; }
+      .hero-img-frame { width: min(340px, 80vw); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { text-align: center; }
+    }
+    @media (max-width: 640px) {
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+      .services-grid { grid-template-columns: 1fr; }
+      .hero-img-frame { width: min(300px, 85vw); }
+      .img-badge { font-size: 0.75rem; padding: 0.6rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Orbs -->
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+
+  <!-- ── NAVBAR ── -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Praiz.</a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+  <div class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation">
+    <div class="mobile-drawer-logo">Praiz.</div>
+    <nav class="mobile-nav-links">
+      <a href="index.html" class="active">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </span>
+        Home
+      </a>
+      <a href="about.html">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </span>
+        About
+      </a>
+      <a href="projects.html">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </span>
+        Projects
+      </a>
+      <a href="contact.html">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </span>
+        Contact
+      </a>
+    </nav>
+    <div class="mobile-drawer-footer">© 2025 Praiz. All rights reserved.</div>
+  </div>
+
+  <!-- ── PAGE CONTENT ── -->
+  <div class="page-wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <!-- Left: Content -->
+        <div class="hero-content">
+          <div class="hero-eyebrow fade-up visible">
+            <span class="dot"></span>
+            Web Developer &amp; CyberSec
+          </div>
+          <h1 class="hero-title fade-up visible" style="transition-delay:0.05s">
+            Hello, I'm
+            <span class="name">Praiz</span>
+          </h1>
+          <p class="hero-desc fade-up visible" style="transition-delay:0.1s">
+            Crafting secure, high-performance digital experiences. Specializing in modern web architecture and cutting-edge cybersecurity solutions.
+          </p>
+          <div class="hero-actions fade-up visible" style="transition-delay:0.15s">
+            <a href="projects.html" class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              View My Work
+            </a>
+            <a href="contact.html" class="btn btn-ghost">
+              Hire Me
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          <div class="hero-stats fade-up visible" style="transition-delay:0.2s">
+            <div class="stat-item">
+              <div class="stat-num">10<span>+</span></div>
+              <div class="stat-label">Projects Done</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">3<span>+</span></div>
+              <div class="stat-label">Years Coding</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">100<span>%</span></div>
+              <div class="stat-label">Dedication</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Visual -->
+        <div class="hero-visual fade-up visible" style="transition-delay:0.25s">
+          <div class="hero-ring" aria-hidden="true"></div>
+          <div class="hero-img-frame">
+            <img src="images/main.jpeg" alt="Praiz — Developer" onerror="this.parentElement.innerHTML='<div class=\'hero-img-placeholder\'><svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'0.5\'><path d=\'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\'/><circle cx=\'12\' cy=\'7\' r=\'4\'/></svg></div>'" />
+            <div class="img-badge">
+              <div class="img-badge-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="img-badge-text">
+                <strong>Available for Work</strong>
+                <span>Open to opportunities</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TECH STRIP -->
+    <div class="tech-strip">
+      <div class="container">
+        <p class="tech-strip-label">Technologies &amp; Tools</p>
+        <div class="tech-pills">
+          <span class="tech-pill"><span class="pill-dot"></span>HTML5 &amp; CSS3</span>
+          <span class="tech-pill"><span class="pill-dot"></span>JavaScript</span>
+          <span class="tech-pill"><span class="pill-dot"></span>React.js</span>
+          <span class="tech-pill"><span class="pill-dot"></span>Node.js</span>
+          <span class="tech-pill"><span class="pill-dot"></span>UI/UX Design</span>
+          <span class="tech-pill cyber"><span class="pill-dot"></span>Cybersecurity</span>
+          <span class="tech-pill cyber"><span class="pill-dot"></span>Penetration Testing</span>
+          <span class="tech-pill cyber"><span class="pill-dot"></span>Linux / Kali</span>
+          <span class="tech-pill cyber"><span class="pill-dot"></span>Cisco Networking</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <section class="services">
+      <div class="container">
+        <div class="services-header">
+          <div class="section-label">What I Do</div>
+          <h2>Services I <span class="gradient-text">Offer</span></h2>
+          <p>From pixel-perfect interfaces to hardened security systems — I build it all.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card fade-up">
+            <div class="service-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3>Web Development</h3>
+            <p>Building fast, responsive, and visually stunning websites using modern frameworks and best practices.</p>
+          </div>
+          <div class="service-card fade-up">
+            <div class="service-icon" style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.2);color:var(--green)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Cybersecurity</h3>
+            <p>Identifying vulnerabilities, conducting penetration tests, and implementing robust security measures.</p>
+          </div>
+          <div class="service-card fade-up">
+            <div class="service-icon" style="background:rgba(124,58,237,0.1);border-color:rgba(124,58,237,0.2);color:#a78bfa">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <h3>Network Engineering</h3>
+            <p>Designing and configuring secure network topologies using Cisco equipment and industry standards.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-card fade-up">
+          <div class="section-label" style="justify-content:center;margin-bottom:1.25rem">Let's Work Together</div>
+          <h2>Ready to Build Something <span class="gradient-text">Amazing?</span></h2>
+          <p>Whether you need a stunning website, a security audit, or a full-stack solution — I'm here to help.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary">
+              Get In Touch
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="projects.html" class="btn btn-ghost">See My Projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <a href="index.html" class="footer-logo">Praiz.</a>
+          <nav class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+        </div>
+        <p class="footer-copy">© 2025 Praiz. Crafted with passion &amp; precision.</p>
+      </div>
+    </footer>
+
+  </div><!-- /page-wrap -->
+
+  <script>
+    (() => {
+      // ── Navbar scroll effect
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 20);
+      }, { passive: true });
+
+      // ── Hamburger / Drawer
+      const hamburger = document.getElementById('hamburger');
+      const drawer    = document.getElementById('mobileDrawer');
+      const overlay   = document.getElementById('mobileOverlay');
+
+      function openMenu() {
+        hamburger.classList.add('open');
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        hamburger.setAttribute('aria-expanded', 'true');
+      }
+      function closeMenu() {
+        hamburger.classList.remove('open');
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+      hamburger.addEventListener('click', () => {
+        drawer.classList.contains('open') ? closeMenu() : openMenu();
+      });
+      overlay.addEventListener('click', closeMenu);
+      document.querySelectorAll('.mobile-nav-links a').forEach(a => a.addEventListener('click', closeMenu));
+
+      // ── Scroll-triggered fade-up with security improvements
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { 
+          if (e.isIntersecting) { 
+            e.target.classList.add('visible'); 
+            observer.unobserve(e.target); 
+          } 
+        });
+      }, { threshold: 0.12 });
+      
+      // Observe elements with security checks
+      document.querySelectorAll('.fade-up:not(.visible)').forEach(el => {
+        // Check if element is in DOM before observing
+        if (document.body.contains(el)) {
+          observer.observe(el);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

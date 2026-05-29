@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Praiz — Web Developer & Cybersecurity Specialist." />
+  <title>About — Praiz</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <meta property="og:title" content="About — Praiz">
+  <meta property="og:description" content="About Praiz — Web Developer & Cybersecurity Specialist.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .page-wrap { position: relative; z-index: 1; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: calc(var(--nav-h) + 4rem) 0 3rem;
+      text-align: center;
+      position: relative;
+    }
+    .page-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .page-hero p {
+      color: var(--text-muted);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ── ABOUT SECTION ── */
+    .about-section {
+      padding: clamp(3rem, 6vh, 5rem) 0;
+      position: relative;
+      z-index: 1;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: center;
+    }
+
+    /* Image side */
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-frame {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      background: var(--surface);
+      aspect-ratio: 4/5;
+    }
+    .about-img-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .about-img-frame:hover img { transform: scale(1.04); }
+    .about-img-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,13,26,0.6) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Floating card on image */
+    .about-img-card {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      background: rgba(13,21,38,0.9);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow);
+      min-width: 180px;
+    }
+    .about-img-card .card-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .about-img-card .card-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Decorative dots */
+    .about-dots {
+      position: absolute;
+      top: -1rem;
+      left: -1rem;
+      width: 80px; height: 80px;
+      background-image: radial-gradient(circle, rgba(56,189,248,0.3) 1px, transparent 1px);
+      background-size: 12px 12px;
+      border-radius: 8px;
+      pointer-events: none;
+    }
+
+    /* Content side */
+    .about-content h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 1.5rem;
+      line-height: 1.15;
+    }
+    .about-content p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+    .about-content p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .about-content p .highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Info list */
+    .about-info-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .info-item .info-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .info-item .info-val {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* ── SKILLS SECTION ── */
+    .skills-section {
+      padding: clamp(3rem, 6vh, 5rem) 0;
+      position: relative;
+      z-index: 1;
+    }
+    .skills-header {
+      text-align: center;
+      margin-bottom: clamp(2rem, 4vh, 3.5rem);
+    }
+    .skills-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.75rem;
+    }
+    .skills-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      transition: all var(--spring);
+    }
+    .skill-group:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+    .skill-group-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .skill-group-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .skill-group-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      transition: all var(--transition);
+    }
+    .skill-tag:hover {
+      color: var(--text);
+      border-color: rgba(56,189,248,0.3);
+      background: rgba(56,189,248,0.06);
+    }
+    .skill-tag .tag-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── EXPERIENCE TIMELINE ── */
+    .experience-section {
+      padding: clamp(3rem, 6vh, 5rem) 0;
+      position: relative;
+      z-index: 1;
+    }
+    .exp-header {
+      text-align: center;
+      margin-bottom: clamp(2rem, 4vh, 3.5rem);
+    }
+    .exp-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.75rem;
+    }
+    .timeline {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+    .timeline-item {
+      display: flex;
+      gap: 1.5rem;
+      padding-bottom: 2.5rem;
+      position: relative;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--bg-2);
+      border: 2px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent);
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 20px rgba(56,189,248,0.2);
+    }
+    .timeline-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      flex: 1;
+      transition: all var(--transition);
+    }
+    .timeline-body:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+    }
+    .timeline-date {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .timeline-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── CTA ── */
+    .about-cta {
+      padding: clamp(3rem, 6vh, 5rem) 0;
+      position: relative;
+      z-index: 1;
+    }
+    .about-cta-inner {
+      background: linear-gradient(135deg, rgba(56,189,248,0.06), rgba(124,58,237,0.06));
+      border: 1px solid rgba(56,189,248,0.15);
+      border-radius: var(--radius-xl);
+      padding: clamp(2.5rem, 5vw, 4rem);
+      text-align: center;
+    }
+    .about-cta-inner h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+    }
+    .about-cta-inner p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 440px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+    .cta-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img-wrap { max-width: 480px; margin: 0 auto; }
+      .about-img-card { right: 0; bottom: -1rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .about-info-list { grid-template-columns: 1fr; }
+      .about-img-card { position: static; margin-top: 1rem; }
+      .about-dots { display: none; }
+      .timeline::before { left: 16px; }
+      .timeline-dot { width: 32px; height: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">Praiz.</a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+  <div class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation">
+    <div class="mobile-drawer-logo">Praiz.</div>
+    <nav class="mobile-nav-links">
+      <a href="index.html">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+        Home
+      </a>
+      <a href="about.html" class="active">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        About
+      </a>
+      <a href="projects.html">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+        Projects
+      </a>
+      <a href="contact.html">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+        Contact
+      </a>
+    </nav>
+    <div class="mobile-drawer-footer">© 2025 Praiz. All rights reserved.</div>
+  </div>
+
+  <div class="page-wrap">
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="container">
+        <div class="section-label fade-up" style="justify-content:center">Get To Know Me</div>
+        <h1 class="fade-up" style="transition-delay:0.05s">About <span class="gradient-text">Me</span></h1>
+        <p class="fade-up" style="transition-delay:0.1s">Passionate developer and security enthusiast building the future of the web — one secure line of code at a time.</p>
+      </div>
+    </div>
+
+    <!-- ABOUT GRID -->
+    <section class="about-section">
+      <div class="container">
+        <div class="about-grid">
+
+          <!-- Image -->
+          <div class="about-img-wrap fade-up">
+            <div class="about-dots" aria-hidden="true"></div>
+            <div class="about-img-frame">
+              <img src="images/about.jpeg" alt="Praiz at work" onerror="this.style.display='none'" />
+            </div>
+            <div class="about-img-card">
+              <div class="card-num">10<span style="color:var(--text-muted);font-size:1.2rem">+</span></div>
+              <div class="card-label">Projects Completed</div>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="about-content fade-up" style="transition-delay:0.1s">
+            <div class="section-label">My Story</div>
+            <h2>Hello, I'm <span class="gradient-text">Praiz</span></h2>
+            <p>I'm a passionate <strong>web developer</strong> and <strong>cybersecurity enthusiast</strong> dedicated to building beautifully crafted and highly secure digital experiences.</p>
+            <p>My journey started with a curiosity for how things work on the internet, which led me down the rabbit hole of both web architecture and <span class="highlight">cyber defense</span>. Today, I specialize in designing modern websites with fluid animations, backed by resilient and secure code.</p>
+            <p>When I'm not coding or hunting for vulnerabilities, you can find me exploring new design trends, contributing to open-source, or leveling up my skill set with the latest certifications.</p>
+
+            <div class="about-info-list">
+              <div class="info-item">
+                <span class="info-label">Specialty</span>
+                <span class="info-val">Web Dev &amp; CyberSec</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Experience</span>
+                <span class="info-val">2+ Years</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Focus</span>
+                <span class="info-val">Secure Applications</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Status</span>
+                <span class="info-val" style="color:var(--green)">● Available</span>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:1rem;flex-wrap:wrap">
+              <a href="projects.html" class="btn btn-primary">View My Work</a>
+              <a href="contact.html" class="btn btn-ghost">Hire Me</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills-section">
+      <div class="container">
+        <div class="skills-header">
+          <div class="section-label" style="justify-content:center">Expertise</div>
+          <h2>Skills &amp; <span class="gradient-text">Technologies</span></h2>
+          <p>A broad toolkit spanning frontend, backend, security, and networking.</p>
+        </div>
+        <div class="skills-grid">
+
+          <div class="skill-group fade-up">
+            <div class="skill-group-header">
+              <div class="skill-group-icon" style="background:rgba(56,189,248,0.1);color:var(--accent)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <span class="skill-group-title">Frontend Development</span>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag"><span class="tag-dot" style="background:#e34c26"></span>HTML5</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:#264de4"></span>CSS3</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:#f7df1e"></span>JavaScript</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:#61dafb"></span>React.js</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:var(--accent)"></span>UI/UX Design</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:var(--accent)"></span>Responsive Design</span>
+            </div>
+          </div>
+
+          <div class="skill-group fade-up">
+            <div class="skill-group-header">
+              <div class="skill-group-icon" style="background:rgba(16,185,129,0.1);color:var(--green)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <span class="skill-group-title">Cybersecurity</span>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag"><span class="tag-dot" style="background:var(--green)"></span>Penetration Testing</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:var(--green)"></span>Kali Linux</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:var(--green)"></span>Nmap / Enumeration</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:var(--green)"></span>Vulnerability Analysis</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:var(--green)"></span>Security Hardening</span>
+            </div>
+          </div>
+
+          <div class="skill-group fade-up">
+            <div class="skill-group-header">
+              <div class="skill-group-icon" style="background:rgba(124,58,237,0.1);color:#a78bfa">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <span class="skill-group-title">Networking</span>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag"><span class="tag-dot" style="background:#a78bfa"></span>Cisco Routers &amp; Switches</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:#a78bfa"></span>VLANs &amp; Trunking</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:#a78bfa"></span>IP Addressing</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:#a78bfa"></span>Packet Tracer</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:#a78bfa"></span>STP / Network Topology</span>
+            </div>
+          </div>
+
+          <div class="skill-group fade-up">
+            <div class="skill-group-header">
+              <div class="skill-group-icon" style="background:rgba(251,191,36,0.1);color:#fbbf24">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              <span class="skill-group-title">Backend &amp; Tools</span>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag"><span class="tag-dot" style="background:#fbbf24"></span>Node.js</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:#fbbf24"></span>Linux Admin</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:#fbbf24"></span>Shell Scripting</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:#fbbf24"></span>Git &amp; GitHub</span>
+              <span class="skill-tag"><span class="tag-dot" style="background:#fbbf24"></span>VS Code</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE TIMELINE -->
+    <section class="experience-section">
+      <div class="container">
+        <div class="exp-header">
+          <div class="section-label" style="justify-content:center">Journey</div>
+          <h2>My <span class="gradient-text">Experience</span></h2>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item fade-up">
+            <div class="timeline-dot">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div class="timeline-body">
+              <div class="timeline-date">2024 — Present</div>
+              <div class="timeline-title">Freelance Web Developer</div>
+              <div class="timeline-desc">Building custom websites and web applications for clients. Delivering responsive, performant, and visually polished digital products.</div>
+            </div>
+          </div>
+          <div class="timeline-item fade-up">
+            <div class="timeline-dot" style="border-color:var(--green);color:var(--green);box-shadow:0 0 20px rgba(16,185,129,0.2)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="timeline-body">
+              <div class="timeline-date" style="color:var(--green)">2023 — Present</div>
+              <div class="timeline-title">Cybersecurity Student &amp; Practitioner</div>
+              <div class="timeline-desc">Studying ethical hacking, penetration testing, and network security. Practicing in isolated lab environments with Kali Linux and Cisco Packet Tracer.</div>
+            </div>
+          </div>
+          <div class="timeline-item fade-up">
+            <div class="timeline-dot" style="border-color:#a78bfa;color:#a78bfa;box-shadow:0 0 20px rgba(124,58,237,0.2)">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div class="timeline-body">
+              <div class="timeline-date" style="color:#a78bfa">2022 — 2023</div>
+              <div class="timeline-title">Self-Taught Web Development</div>
+              <div class="timeline-desc">Started the coding journey with HTML, CSS, and JavaScript. Built personal projects and explored modern frameworks like React.js.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta">
+      <div class="container">
+        <div class="about-cta-inner fade-up">
+          <div class="section-label" style="justify-content:center;margin-bottom:1.25rem">Work With Me</div>
+          <h2>Let's Build Something <span class="gradient-text">Together</span></h2>
+          <p>I'm always open to new projects, collaborations, and opportunities. Let's create something great.</p>
+          <div class="cta-btns">
+            <a href="contact.html" class="btn btn-primary">
+              Get In Touch
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="projects.html" class="btn btn-ghost">See My Projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <a href="index.html" class="footer-logo">Praiz.</a>
+          <nav class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+        </div>
+        <p class="footer-copy">© 2025 Praiz. Crafted with passion &amp; precision.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    (() => {
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 20);
+      }, { passive: true });
+
+      const hamburger = document.getElementById('hamburger');
+      const drawer    = document.getElementById('mobileDrawer');
+      const overlay   = document.getElementById('mobileOverlay');
+
+      function openMenu() {
+        hamburger.classList.add('open'); drawer.classList.add('open');
+        overlay.classList.add('open'); document.body.style.overflow = 'hidden';
+        hamburger.setAttribute('aria-expanded', 'true');
+      }
+      function closeMenu() {
+        hamburger.classList.remove('open'); drawer.classList.remove('open');
+        overlay.classList.remove('open'); document.body.style.overflow = '';
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+      hamburger.addEventListener('click', () => drawer.classList.contains('open') ? closeMenu() : openMenu());
+      overlay.addEventListener('click', closeMenu);
+      document.querySelectorAll('.mobile-nav-links a').forEach(a => a.addEventListener('click', closeMenu));
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
